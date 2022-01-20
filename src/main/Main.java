@@ -37,6 +37,8 @@ public class Main {
                     iniciarSesion();
                     break;
                 default:
+                    System.out.println("Ingrese una opcion correcta");
+                    System.out.println("");
                     break;
             }
         }
@@ -85,6 +87,7 @@ public class Main {
                     break;
                 default:
                     System.out.println("Ingrese una opcion correcta");
+                    System.out.println("");
                     break;
             }
         }
@@ -187,6 +190,8 @@ public class Main {
                     cancelarPrestamo(carritoPrestamo);
                     break;
                 default:
+                    System.out.println("Ingrese una opcion correcta");
+                    System.out.println("");
                     break;
             }
         }
@@ -198,13 +203,16 @@ public class Main {
         String codigo = sc.nextLine();
         if (Utils.contieneLibro(codigo, carritoPrestamo) || est.contieneLibro(codigo)) {
             System.out.println("No puedes solicitar un libro ya reservado o prestado.");
+            System.out.println("");
         } else {
             CopiaLibro cl = sistema.getCatalogo().seleccionarLibro(codigo);
             if (cl == null) {
                 System.out.println("Codigo no existe");
             } else {
                 carritoPrestamo.add(cl);
+                System.out.println("Libro seleccionado exitosamente");
             }
+            System.out.println("");
         }
     }
 
@@ -223,7 +231,7 @@ public class Main {
             System.out.println("No hay ningun libro seleccionado por cancelar.");
         } else {
             sistema.getCatalogo().cancelarPrestamo(carritoPrestamo);
-            System.out.println("Se ha cancelado exitosamente el prestamo");
+            System.out.println("Se ha cancelado su prestamo");
         }
 
     }

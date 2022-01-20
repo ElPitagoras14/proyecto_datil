@@ -23,12 +23,12 @@ public class CopiaLibro extends Libro {
         super(codigo, titulo, autor);
     }
     
-    public void actualizarPrestamo() {
+    public void actualizarFechasPrestamo() {
         fechaEmision = LocalDate.now();
         fechaDevolucion = fechaEmision.plusDays(30);
     }
     
-    public void actualizarDevolucion() {
+    public void actualizarFechasDevolucion() {
         fechaEmision = null;
         fechaDevolucion = null;
     }

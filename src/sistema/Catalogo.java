@@ -29,7 +29,6 @@ public class Catalogo {
             sb.append(String.format("\n%-15s%-35s%-25s%-15s", copia.getCodigo(), copia.getTitulo(), copia.getAutor(), cl.size()));
         }
         System.out.println(sb.toString());
-        sb = null;
     }
 
     public void agregarLibro(Libro libro, int cantidad) {
@@ -59,7 +58,7 @@ public class Catalogo {
     public void confirmarPrestamo(LinkedList<CopiaLibro> seleccionados, Estudiante estudiante) {
         while(!seleccionados.isEmpty()) {
             CopiaLibro cl = seleccionados.removeLast();
-            cl.actualizarPrestamo();
+            cl.actualizarFechasPrestamo();
             estudiante.prestarLibro(cl);
         }
     }
