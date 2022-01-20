@@ -1,6 +1,6 @@
 # Proyecto Datil
 
-El proyecto consiste en simular el sistema para una biblioteca digital. La biblioteca al instanciarse se inicializa con datos para la rápida prueba del programa, en específico se instancia junto a 3 cuentas, 5 libros y distintas cantidades de copias para cada uno. Los estudiantes no poseen prestamos al crearse.
+El proyecto consiste en simular el sistema para una biblioteca digital. La biblioteca al instanciarse se inicializa con datos para la rápida prueba del programa, en específico se instancia junto a 3 cuentas, 5 libros y distintas cantidades de copias para cada uno. Los estudiantes no poseen préstamos al crearse.
 
 ---
 
