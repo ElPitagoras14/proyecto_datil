@@ -5,6 +5,8 @@
  */
 package sistema;
 
+import utilitarios.Utils;
+import usuarios.Estudiante;
 import java.util.LinkedList;
 
 /**

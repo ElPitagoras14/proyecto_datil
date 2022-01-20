@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistema;
+package usuarios;
 
 /**
  *
  * @author jhony
  */
-public enum EstadoLibro {
-    PRESTADO,
-    SELECCIONADO,
-    SINPRESTAR
+public class Administrador extends Usuario{
+    
+    public Administrador(String username, String password, String nombre) {
+        super(username, password, nombre);
+    }
+    
 }

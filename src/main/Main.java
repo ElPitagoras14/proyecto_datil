@@ -7,13 +7,13 @@ package main;
 
 import java.util.LinkedList;
 import java.util.Scanner;
-import sistema.Administrador;
+import usuarios.Administrador;
 import sistema.Biblioteca;
 import sistema.CopiaLibro;
-import sistema.Estudiante;
+import usuarios.Estudiante;
 import sistema.Libro;
-import sistema.Usuario;
-import sistema.Utils;
+import usuarios.Usuario;
+import utilitarios.Utils;
 
 /**
  *

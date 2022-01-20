@@ -26,12 +26,6 @@ public abstract class Libro {
         this.autor = autor;
     }
     
-    public Libro() {
-        autor = "Jose";
-        titulo = "Las aventuras de Don Juanito";
-        codigo = "001";
-    }
-    
     @Override
     public boolean equals(Object o){
         if (o == null) {

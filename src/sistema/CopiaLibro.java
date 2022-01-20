@@ -6,7 +6,6 @@
 package sistema;
 
 import java.time.LocalDate;
-import static sistema.EstadoLibro.*;
 
 /**
  *
@@ -22,10 +21,6 @@ public class CopiaLibro extends Libro {
 
     public CopiaLibro(String codigo, String titulo, String autor) {
         super(codigo, titulo, autor);
-    }
-
-    public CopiaLibro() {
-
     }
     
     public void actualizarPrestamo() {
