@@ -6,37 +6,38 @@
 package sistema;
 
 import java.time.LocalDate;
-import static sistema.EstadoLibro.SINPRESTAR;
+import static sistema.EstadoLibro.*;
 
 /**
  *
  * @author jhony
  */
 public class CopiaLibro extends Libro {
-
-    private EstadoLibro estado;
     private LocalDate fechaEmision;
     private LocalDate fechaDevolucion;
 
     public CopiaLibro(Libro libro) {
         super(libro);
-        estado = SINPRESTAR;
     }
 
     public CopiaLibro(String codigo, String titulo, String autor) {
         super(codigo, titulo, autor);
-        estado = SINPRESTAR;
     }
-    
-    
 
     public CopiaLibro() {
 
     }
-
-    public EstadoLibro getEstado() {
-        return estado;
+    
+    public void actualizarPrestamo() {
+        fechaEmision = LocalDate.now();
+        fechaDevolucion = fechaEmision.plusDays(30);
     }
+    
+    public void actualizarDevolucion() {
+        fechaEmision = null;
+        fechaDevolucion = null;
+    }
+
 
     public LocalDate getFechaEmision() {
         return fechaEmision;

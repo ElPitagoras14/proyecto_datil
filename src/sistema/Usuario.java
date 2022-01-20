@@ -19,6 +19,16 @@ public abstract class Usuario {
         this.password = password;
         this.nombre = nombre;
     }
-    
-    
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 }

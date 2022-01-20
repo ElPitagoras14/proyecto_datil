@@ -11,6 +11,6 @@ package sistema;
  */
 public enum EstadoLibro {
     PRESTADO,
-    RESERVADO,
+    SELECCIONADO,
     SINPRESTAR
 }

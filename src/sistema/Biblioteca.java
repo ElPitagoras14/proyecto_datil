@@ -31,20 +31,56 @@ public class Biblioteca {
         }
         return instance;
     }
-
-    public void inicializar() {
-        Estudiante estudiante = new Estudiante("", "", "");
-        cuentas.add(estudiante);
-        for (int i = 0; i < 3; i++) {
-            LinkedList<CopiaLibro> tmp = new LinkedList<>();
-            Libro libro = new CopiaLibro("" + i, "Las Aventuras de " + i, "Jose " + i);
-            for (int j = 0; j < 3; j++) {
-                tmp.add(new CopiaLibro(libro));
+    
+    public Usuario iniciarSesion(String usuario, String password) {
+        for (Usuario us: cuentas) {
+            if (us.getUsername().equals(usuario) && us.getPassword().equals(password)) {
+                return us;
             }
-            estudiante.prestarLibro(new CopiaLibro(libro));
-            libros.add(tmp);
         }
-
+        return null;
+    }
+    
+    private void inicializar() {
+        //Creando cuentas
+        Administrador adm1 = new Administrador("adm1", "12345", "José Gavilanez");
+        Estudiante est1 = new Estudiante("est1", "12345", "Cecilia Freire");
+        Estudiante est2 = new Estudiante("est2", "12345", "Carlos Vargas");
+        
+        cuentas.add(adm1);
+        cuentas.add(est1);
+        cuentas.add(est2);
+        
+        //Creando libros
+        Libro lb1 = new CopiaLibro("001", "El Príncipe", "Nicolas Maquiavelo");
+        Libro lb2 = new CopiaLibro("002", "El Código da Vinci", "Dan Brown");
+        Libro lb3 = new CopiaLibro("003", "El Alquimista", "Paulo Coelho");
+        Libro lb4 = new CopiaLibro("004", "El diario de Ana Frank", "Anna Frank");
+        
+        //Agregando libros
+        agregarLibrosInicializar(lb1, 5);
+        agregarLibrosInicializar(lb2, 7);
+        agregarLibrosInicializar(lb3, 8);
+        agregarLibrosInicializar(lb4, 9);
+    }
+    
+    private void agregarLibrosInicializar(Libro libro, int cantidad) {
+        LinkedList<CopiaLibro> lista = new LinkedList<>();
+        for (int i = 0; i < cantidad; i++) {
+            lista.add(new CopiaLibro(libro));
+        }
+        libros.add(lista);
+    }
+    
+    public LinkedList<CopiaLibro> getLibrosPrestados() {
+        LinkedList<CopiaLibro> prestados = new LinkedList<>();
+        for (Usuario us: cuentas) {
+            if (us instanceof Estudiante) {
+                Estudiante tmp = (Estudiante) us;
+                prestados.addAll(tmp.getLibrosPrestados());
+            }
+        }
+        return prestados;
     }
 
     public Catalogo getCatalogo() {

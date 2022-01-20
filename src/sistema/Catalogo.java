@@ -21,53 +21,53 @@ public class Catalogo {
 
     public void mostrarCatalogo() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-15s%-35s%-15s%-15s", "Codigo", "Titulo", "Autor", "Cantidad disponible"));
+        sb.append(String.format("%-15s%-35s%-25s%-15s", "Codigo", "Titulo", "Autor", "Cantidad disponible"));
         for (LinkedList<CopiaLibro> cl : libros) {
             Libro copia = cl.getFirst();
-            sb.append(String.format("\n%-15s%-35s%-15s%-15s", copia.getCodigo(), copia.getTitulo(), copia.getAutor(), cl.size()));
+            sb.append(String.format("\n%-15s%-35s%-25s%-15s", copia.getCodigo(), copia.getTitulo(), copia.getAutor(), cl.size()));
         }
         System.out.println(sb.toString());
         sb = null;
     }
 
     public void agregarLibro(Libro libro, int cantidad) {
-        for (LinkedList<CopiaLibro> cl : libros) {
-            if (!cl.isEmpty()) {
-                if (cl.getFirst().getCodigo().equals(libro.getCodigo())) {
-                    for (int i = 0; i < cantidad; i++) {
-                        cl.add(new CopiaLibro(libro));
-                    }
-                    return;
-                }
+        LinkedList<CopiaLibro> listaLibro = Utils.getCopiasLibro(libro.getCodigo(), libros);
+        if (listaLibro == null) {
+            listaLibro = new LinkedList<>();
+            for (int i = 0; i < cantidad; i++) {
+                listaLibro.add(new CopiaLibro(libro));
             }
-        }
-        LinkedList<CopiaLibro> tmp = new LinkedList<>();
-        libros.add(tmp);
-        for (int i = 0; i < cantidad; i++) {
-            tmp.add(new CopiaLibro(libro));
+            libros.add(listaLibro);
+        } else {
+            for (int i = 0; i < cantidad; i++) {
+                listaLibro.add(new CopiaLibro(libro));
+            }
         }
     }
 
-    public boolean prestarLibro(String codigo, Estudiante estudiante) {
-        for (LinkedList<CopiaLibro> cl : libros) {
-            if (!cl.isEmpty()) {
-                if (cl.getFirst().getCodigo().equals(codigo)) {
-                    estudiante.prestarLibro(cl.removeLast());
-                    return true;
-                }
-            }
+    public CopiaLibro seleccionarLibro(String codigo) {
+        LinkedList<CopiaLibro> cl = Utils.getCopiasLibro(codigo, libros);
+        if (cl == null) {
+            return null;
         }
-        return false;
+        CopiaLibro libroPrestar = cl.removeLast();
+        return libroPrestar;
     }
 
-    private LinkedList<Libro> librosUnicos(LinkedList<LinkedList<CopiaLibro>> libros) {
-        LinkedList<Libro> catalogoLibros = new LinkedList<>();
-        for (LinkedList<CopiaLibro> cl : libros) {
-            catalogoLibros.add((Libro) cl.getFirst());
+    public void confirmarPrestamo(LinkedList<CopiaLibro> seleccionados, Estudiante estudiante) {
+        while(!seleccionados.isEmpty()) {
+            CopiaLibro cl = seleccionados.removeLast();
+            cl.actualizarPrestamo();
+            estudiante.prestarLibro(cl);
         }
-        return catalogoLibros;
     }
     
+    public void cancelarPrestamo(LinkedList<CopiaLibro> seleccionados) {
+        while(!seleccionados.isEmpty()) {
+            agregarLibro(seleccionados.removeLast(), 1);
+        }
+    }
+
     public void mostrarInformacionLibro(String codigo) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-15s%-35s%-15s", "Codigo", "Titulo", "Autor"));
