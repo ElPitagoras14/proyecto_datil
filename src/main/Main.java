@@ -105,24 +105,42 @@ public class Main {
 
     private static void agregarLibroAdm() {
         System.out.println("");
-        System.out.println("Nota: Si el codigo ingresado existe, se aumentará la cantidad indiferentemente del titulo o autor ingresados");
         System.out.println("Agregue los siguientes datos");
         System.out.print("Código: ");
         String codigo = sc.nextLine();
-        System.out.print("Título: ");
-        String titulo = sc.nextLine();
-        System.out.print("Autor: ");
-        String autor = sc.nextLine();
-        System.out.print("Cantidad: ");
-        int cantidad = Integer.parseInt(sc.nextLine());
-
-        if (cantidad > 0) {
-            Libro libro = new CopiaLibro(codigo, titulo, autor);
-            sistema.getCatalogo().agregarLibro(libro, cantidad);
-            System.out.println("Libro agregado exitosamente");
+        
+        int cantidad;
+        if (sistema.getCatalogo().existeLibro(codigo)) {
+            System.out.println("Agregando tomos para libro: ");
+            sistema.getCatalogo().mostrarInformacionLibro(codigo);
+            System.out.println("");
+            System.out.print("Ingrese los tomos a añadir: ");
+            cantidad = Integer.parseInt(sc.nextLine());
+            
+            if (cantidad > 0) {
+                Libro libro = new CopiaLibro(codigo, "", "");
+                sistema.getCatalogo().agregarLibro(libro, cantidad);
+                System.out.println("Tomos agregados exitosamente.");
+            } else {
+                System.out.println("La cantidad debe ser mayor a 0.");
+            }
         } else {
-            System.out.println("La cantidad debe ser mayor a 0");
+            System.out.print("Título: ");
+            String titulo = sc.nextLine();
+            System.out.print("Autor: ");
+            String autor = sc.nextLine();
+            System.out.print("Cantidad: ");
+            cantidad = Integer.parseInt(sc.nextLine());
+
+            if (cantidad > 0) {
+                Libro libro = new CopiaLibro(codigo, titulo, autor);
+                sistema.getCatalogo().agregarLibro(libro, cantidad);
+                System.out.println("Libro agregado exitosamente.");
+            } else {
+                System.out.println("La cantidad debe ser mayor a 0.");
+            }
         }
+
         System.out.println("");
     }
 
@@ -149,7 +167,7 @@ public class Main {
                     mostrarPrestamosEst(est);
                     break;
                 default:
-                    System.out.println("Ingrese una opcion correcta");
+                    System.out.println("Ingrese una opcion correcta.");
                     break;
             }
         }
@@ -174,8 +192,8 @@ public class Main {
             sistema.getCatalogo().mostrarCatalogo();
             System.out.println("");
             System.out.println("1. Prestar un libro.");
-            System.out.println("2. Confirmar prestamo");
-            System.out.println("3. Cancelar y Salir");
+            System.out.println("2. Confirmar prestamo.");
+            System.out.println("3. Cancelar y Salir.");
             System.out.print("Ingrese una opcion: ");
 
             opcion = sc.nextLine();
@@ -190,7 +208,7 @@ public class Main {
                     cancelarPrestamo(carritoPrestamo);
                     break;
                 default:
-                    System.out.println("Ingrese una opcion correcta");
+                    System.out.println("Ingrese una opcion correcta.");
                     System.out.println("");
                     break;
             }
@@ -207,10 +225,10 @@ public class Main {
         } else {
             CopiaLibro cl = sistema.getCatalogo().seleccionarLibro(codigo);
             if (cl == null) {
-                System.out.println("Codigo no existe");
+                System.out.println("Libro no disponible actualmente o no existe.");
             } else {
                 carritoPrestamo.add(cl);
-                System.out.println("Libro seleccionado exitosamente");
+                System.out.println("Libro seleccionado exitosamente.");
             }
             System.out.println("");
         }
@@ -221,9 +239,9 @@ public class Main {
             System.out.println("No ha seleccionado algún libro.");
         } else {
             sistema.getCatalogo().confirmarPrestamo(carritoPrestamo, est);
-            System.out.println("Su prestamo ha sido exitoso");
+            System.out.println("Su prestamo ha sido exitoso.");
         }
-
+        System.out.println("");
     }
 
     private static void cancelarPrestamo(LinkedList<CopiaLibro> carritoPrestamo) {

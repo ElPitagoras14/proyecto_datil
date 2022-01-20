@@ -58,10 +58,10 @@ public class Biblioteca {
         Libro lb1 = new CopiaLibro("001", "El Príncipe", "Nicolas Maquiavelo");
         Libro lb2 = new CopiaLibro("002", "El Código da Vinci", "Dan Brown");
         Libro lb3 = new CopiaLibro("003", "El Alquimista", "Paulo Coelho");
-        Libro lb4 = new CopiaLibro("004", "El diario de Ana Frank", "Anna Frank");
+        Libro lb4 = new CopiaLibro("004", "JoJo's Bizarre Adventure", "Hirohiko Araki");
         
         //Agregando libros
-        agregarLibrosInicializar(lb1, 5);
+        agregarLibrosInicializar(lb1, 0);
         agregarLibrosInicializar(lb2, 7);
         agregarLibrosInicializar(lb3, 8);
         agregarLibrosInicializar(lb4, 9);
@@ -69,7 +69,7 @@ public class Biblioteca {
     
     private void agregarLibrosInicializar(Libro libro, int cantidad) {
         LinkedList<CopiaLibro> lista = new LinkedList<>();
-        for (int i = 0; i < cantidad; i++) {
+        for (int i = 0; i < cantidad + 1; i++) {
             lista.add(new CopiaLibro(libro));
         }
         libros.add(lista);

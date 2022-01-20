@@ -26,16 +26,16 @@ public class Catalogo {
         sb.append(String.format("%-15s%-35s%-25s%-15s", "Codigo", "Titulo", "Autor", "Cantidad disponible"));
         for (LinkedList<CopiaLibro> cl : libros) {
             Libro copia = cl.getFirst();
-            sb.append(String.format("\n%-15s%-35s%-25s%-15s", copia.getCodigo(), copia.getTitulo(), copia.getAutor(), cl.size()));
+            sb.append(String.format("\n%-15s%-35s%-25s%-15s", copia.getCodigo(), copia.getTitulo(), copia.getAutor(), cl.size() - 1));
         }
         System.out.println(sb.toString());
     }
 
     public void agregarLibro(Libro libro, int cantidad) {
-        LinkedList<CopiaLibro> listaLibro = Utils.getCopiasLibro(libro.getCodigo(), libros);
+        LinkedList<CopiaLibro> listaLibro = Utils.getListaLibros(libro.getCodigo(), libros);
         if (listaLibro == null) {
             listaLibro = new LinkedList<>();
-            for (int i = 0; i < cantidad; i++) {
+            for (int i = 0; i < cantidad + 1; i++) {
                 listaLibro.add(new CopiaLibro(libro));
             }
             libros.add(listaLibro);
@@ -45,9 +45,9 @@ public class Catalogo {
             }
         }
     }
-
+    
     public CopiaLibro seleccionarLibro(String codigo) {
-        LinkedList<CopiaLibro> cl = Utils.getCopiasLibro(codigo, libros);
+        LinkedList<CopiaLibro> cl = Utils.getCopiasDisponibles(codigo, libros);
         if (cl == null) {
             return null;
         }
@@ -79,5 +79,9 @@ public class Catalogo {
             }
         }
         System.out.println(sb.toString());
+    }
+    
+    public boolean existeLibro(String codigo) {
+        return Utils.getListaLibros(codigo, libros) != null;
     }
 }

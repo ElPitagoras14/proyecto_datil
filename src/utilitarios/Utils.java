@@ -23,7 +23,18 @@ public class Utils {
         return false;
     }
     
-    public static LinkedList<CopiaLibro> getCopiasLibro(String codigo, LinkedList<LinkedList<CopiaLibro>> lista) {
+    public static LinkedList<CopiaLibro> getCopiasDisponibles(String codigo, LinkedList<LinkedList<CopiaLibro>> lista) {
+        for (LinkedList<CopiaLibro> cl: lista) {
+            if (!cl.isEmpty()) {
+                if (cl.getFirst().getCodigo().equals(codigo) && cl.size() > 1) {
+                    return cl;
+                }
+            }
+        }
+        return null;
+    }
+    
+    public static LinkedList<CopiaLibro> getListaLibros(String codigo, LinkedList<LinkedList<CopiaLibro>> lista) {
         for (LinkedList<CopiaLibro> cl: lista) {
             if (!cl.isEmpty()) {
                 if (cl.getFirst().getCodigo().equals(codigo)) {
